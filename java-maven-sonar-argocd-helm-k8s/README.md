@@ -58,5 +58,55 @@ Steps:
     7. Run the Jenkins pipeline:
        7.1 Trigger the Jenkins pipeline to start the CI/CD process for the Java application.
        7.2 Monitor the pipeline stages and fix any issues that arise.
+## Project Walkthrough 
 
+### 1. AWS EC2 Instance
+EC2 instance hosting Jenkins, SonarQube and the Kubernetes cluster.
+
+![AWS EC2 Instance](screenshots/01-aws-ec2-instance.png)
+
+### 2. Application Output
+Spring Boot application built with Maven and running in the browser.
+
+![Application Output](screenshots/02-application-output.png)
+
+### 3. Jenkins Build History
+Both pipeline builds completed successfully.
+
+![Jenkins Build History](screenshots/03-jenkins-build-history.png)
+
+### 4. Jenkins Pipeline Stage View
+All stages passed: Checkout → Build and Test → Static Code Analysis → Build and Push Docker Image → Update Deployment File.
+
+![Jenkins Stage View](screenshots/04-jenkins-stage-view.png)
+
+### 5. SonarQube Quality Gate
+SonarQube analysis passed with 0 bugs, 0 vulnerabilities and 0 code smells.
+
+![SonarQube Quality Gate](screenshots/05-sonarqube-quality-gate.png)
+
+### 6. Argo CD Access via Port-Forward
+Exposing the Argo CD server with `kubectl port-forward` on port 8081.
+
+![Argo CD Port Forward](screenshots/06-argocd-port-forward.png)
+
+### 7. Argo CD Dashboard (Before Deployment)
+Argo CD installed and running, with no applications created yet.
+
+![Argo CD Empty Dashboard](screenshots/07-argocd-empty-dashboard.png)
+
+### 8. Creating the Argo CD Application
+Applying the Argo CD Application manifest with `kubectl apply`, pointing to the manifests folder in GitHub.
+
+![kubectl apply Argo CD Application](screenshots/08-kubectl-apply-argocd-app.png)
+
+### 9. Kubernetes Pod Image Verification
+The pod runs the Docker image built and pushed by the Jenkins pipeline.
+
+![Kubernetes Pod Image](screenshots/09-kubernetes-pod-image.png)
+
+### 10. Argo CD: Healthy and Synced
+Final stage: the application is Healthy and Synced in Argo CD.
+
+![Argo CD Healthy and Synced](screenshots/10-argocd-healthy-synced.png)
 This end-to-end Jenkins pipeline will automate the entire CI/CD process for a Java application, from code checkout to production deployment, using popular tools like SonarQube, Argo CD, Helm, and Kubernetes.
